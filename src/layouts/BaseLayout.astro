@@ -8,6 +8,7 @@ interface Props {
 import { siteConfig } from '../config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import '../styles/global.css';
 
 const {
@@ -39,6 +40,7 @@ const pageTitle = title === siteConfig.title ? title : `${title} · ${siteConfig
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <title>{pageTitle}</title>
+    <GoogleAnalytics />
     <script is:inline>
       const theme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

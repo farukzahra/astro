@@ -1,6 +1,6 @@
 # Adapting Spring Boot REST to MCP
 
-Runnable example for the blog article **Adapting an Existing Spring Boot REST API to MCP**.
+Runnable example for the blog article **Adapting a Spring Boot REST API to MCP with Spring AI**.
 
 ## Prerequisites
 

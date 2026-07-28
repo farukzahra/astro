@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        PUBLIC_GA_MEASUREMENT_ID: ${PUBLIC_GA_MEASUREMENT_ID:-}
     container_name: tech-blog
     restart: unless-stopped
     ports:
