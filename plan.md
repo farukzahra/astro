@@ -552,16 +552,16 @@ Caddy (HTTPS já configurado)
 
 ## Fase 2 — Conteúdo e features
 
-- [ ] Pagefind, Shiki, Mermaid, KaTeX
-- [ ] RSS, sitemap, robots.txt, OG tags
-- [ ] Homepage (hero, categorias, busca, featured)
-- [ ] Primeiro artigo de exemplo
+- [x] Pagefind, Shiki, Mermaid, KaTeX
+- [x] RSS, sitemap, robots.txt, OG tags
+- [x] Homepage (hero, categorias, busca, featured)
+- [x] Primeiro artigo de exemplo
 
 ## Fase 3 — Deploy
 
-- [ ] Dockerfile multi-stage
-- [ ] docker-compose.prod.yml
-- [ ] GitHub Actions deploy.yml
+- [x] Dockerfile multi-stage
+- [x] docker-compose.prod.yml
+- [x] GitHub Actions deploy.yml
 - [ ] DNS + Caddy na VPS
 - [ ] Primeiro deploy automático
 

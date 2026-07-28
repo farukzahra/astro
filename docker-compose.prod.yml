@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tech-blog
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8084:80"

@@ -1,0 +1,15 @@
+node_modules
+dist
+.astro
+.git
+.cursor
+*.md
+!README.md
+secrets.local.md
+.env
+.env.*
+!.env.example
+deploy
+plan.md
+AGENTS.md
+skills-lock.json

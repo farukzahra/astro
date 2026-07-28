@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+set -eu
+
+APP_DIR="${APP_DIR:-/opt/tech-blog}"
+DEPLOY_REF="${DEPLOY_REF:-origin/main}"
+WEB_PORT="${WEB_PORT:-8084}"
+GITHUB_REPO="${GITHUB_REPO:-farukzahra/astro}"
+COMPOSE_FILE="${COMPOSE_FILE:-docker-compose.prod.yml}"
+
+cd "$APP_DIR"
+
+sync_repo() {
+  if [ -n "${GITHUB_TOKEN:-}" ]; then
+    git fetch "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" \
+      "+refs/heads/*:refs/remotes/origin/*" --prune
+  else
+    git fetch --all --prune
+  fi
+  git reset --hard "$DEPLOY_REF"
+}
+
+ensure_docker() {
+  if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+    return 0
+  fi
+  echo "Docker or Docker Compose not found on VPS." >&2
+  exit 1
+}
+
+deploy_stack() {
+  docker compose -f "$COMPOSE_FILE" build --pull
+  docker compose -f "$COMPOSE_FILE" up -d --remove-orphans
+}
+
+health_check() {
+  sleep 3
+  curl -fsS "http://127.0.0.1:${WEB_PORT}/" >/dev/null
+  echo "OK: tech-blog responding on 127.0.0.1:${WEB_PORT}"
+}
+
+sync_repo
+ensure_docker
+deploy_stack
+health_check

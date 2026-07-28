@@ -1,0 +1,8 @@
+# Adicionar em /etc/caddy/Caddyfile após DNS propagar:
+#   A  blog  66.23.231.218
+# Depois: systemctl reload caddy
+
+blog.faruk.dev.br {
+	encode gzip zstd
+	reverse_proxy 127.0.0.1:8084
+}
