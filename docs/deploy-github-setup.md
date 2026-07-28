@@ -1,29 +1,12 @@
-## GitHub — PAT com scope `workflow`
+## GitHub — PAT
 
-O PAT em `github-pat.txt` **não tem** scope `workflow`. Push de `.github/workflows/deploy.yml` falha até regenerar o token com:
+Arquivo canônico: `C:\repo\financeiro\planos\vps-secrets\github-pat.txt` (atualizado 2026-07-28).
 
-- `repo`
-- `workflow`
+Scopes necessários: `repo`, `workflow`.
 
-Revogar o antigo em GitHub → Settings → Developer settings → PAT.
-
-Depois:
+Configurar secrets automaticamente:
 
 ```powershell
-git push origin main
+$env:GITHUB_PAT = (Get-Content C:\repo\financeiro\planos\vps-secrets\github-pat.txt | Where-Object { $_ -match '^ghp_' })
+node scripts/set-github-secrets.mjs
 ```
-
-## GitHub Secrets (após push do workflow)
-
-```powershell
-$pat = Get-Content C:\repo\financeiro\planos\vps-secrets\github-pat.txt | Where-Object { $_ -match '^ghp_' }
-$pat | gh auth login --with-token
-
-gh secret set VPS_HOST --repo farukzahra/astro --body "66.23.231.218"
-gh secret set VPS_USER --repo farukzahra/astro --body "root"
-gh secret set VPS_PORT --repo farukzahra/astro --body "22"
-gh secret set DEPLOY_PATH --repo farukzahra/astro --body "/opt/tech-blog"
-Get-Content C:\repo\financeiro\planos\vps-secrets\deploy_key -Raw | gh secret set VPS_SSH_KEY --repo farukzahra/astro
-```
-
-Variable opcional: `WEB_PORT=8085`

@@ -1,0 +1,65 @@
+---
+import { siteConfig } from '../config';
+
+const { giscus } = siteConfig;
+---
+
+<section
+  id="comments"
+  class="mx-auto max-w-3xl px-4 pb-16"
+  aria-labelledby="comments-heading"
+>
+  <h2 id="comments-heading" class="mb-6 text-2xl font-bold">Comentários</h2>
+  <p class="mb-6 text-sm" style="color: var(--color-muted)">
+    Comentários via GitHub — é preciso estar logado para participar.
+  </p>
+  <div class="giscus" />
+</section>
+
+<script
+  is:inline
+  define:vars={{
+    repo: giscus.repo,
+    repoId: giscus.repoId,
+    category: giscus.category,
+    categoryId: giscus.categoryId,
+    mapping: giscus.mapping,
+    lang: giscus.lang,
+  }}
+>
+  function getTheme() {
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  }
+
+  function loadGiscus() {
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', repo);
+    script.setAttribute('data-repo-id', repoId);
+    script.setAttribute('data-category', category);
+    script.setAttribute('data-category-id', categoryId);
+    script.setAttribute('data-mapping', mapping);
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'bottom');
+    script.setAttribute('data-theme', getTheme());
+    script.setAttribute('data-lang', lang);
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+    document.querySelector('.giscus')?.appendChild(script);
+  }
+
+  function sendGiscusTheme(theme) {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe?.contentWindow) return;
+    iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+  }
+
+  loadGiscus();
+
+  const observer = new MutationObserver(() => {
+    sendGiscusTheme(getTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>

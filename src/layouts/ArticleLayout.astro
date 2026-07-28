@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import MermaidInit from '../components/MermaidInit.astro';
+import GiscusComments from '../components/GiscusComments.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -38,5 +39,6 @@ const { title, description, publishDate, updatedDate, author, tags } = article.d
       <slot />
     </div>
   </article>
+  <GiscusComments />
   <MermaidInit />
 </BaseLayout>

@@ -564,8 +564,8 @@ Caddy (HTTPS já configurado)
 - [x] GitHub Actions deploy.yml
 - [x] DNS + Caddy na VPS
 - [x] Primeiro deploy manual (Docker + HTTPS)
-- [ ] Push do workflow + secrets GitHub (PAT precisa scope `workflow`)
-- [ ] Primeiro deploy automático via Actions
+- [x] Secrets GitHub configurados
+- [x] Deploy automático via Actions (workflow run #2 — success)
 
 ## Fase 4 — Polish
 

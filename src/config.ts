@@ -8,6 +8,14 @@ export const siteConfig = {
   github: 'https://github.com/farukzahra',
   linkedin: 'https://www.linkedin.com/in/farukzahra',
   newsletter: '#newsletter',
+  giscus: {
+    repo: 'farukzahra/astro',
+    repoId: '1315085702',
+    category: 'General',
+    categoryId: 'DIC_kwDOTmKdhs4DCKnK',
+    mapping: 'pathname',
+    lang: 'pt',
+  },
 } as const;
 
 export const categories = [
