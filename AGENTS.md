@@ -129,7 +129,7 @@ Resumo:
 | Item | Valor |
 |------|-------|
 | Path VPS | `/opt/tech-blog` |
-| Porta | `8084` |
+| Porta | `8085` |
 | Domínio | `blog.faruk.dev.br` |
 | SSH key | `C:\repo\financeiro\planos\vps-secrets\deploy_key` |
 | PAT | `C:\repo\financeiro\planos\vps-secrets\github-pat.txt` |

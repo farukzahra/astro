@@ -358,7 +358,7 @@ Caddy (host — HTTPS)
 
 ↓
 
-Nginx (Docker, 127.0.0.1:8084)
+Nginx (Docker, 127.0.0.1:8085)
 
 ↓
 
@@ -386,7 +386,7 @@ Documentação canônica:
 |------|-------|
 | VPS IP | `66.23.231.218` |
 | Path na VPS | `/opt/tech-blog` |
-| Porta interna | `8084` (Caddy → Nginx Docker) |
+| Porta interna | `8085` (Caddy → Nginx Docker) |
 | Domínio sugerido | `blog.faruk.dev.br` |
 | Repo GitHub | `farukzahra/astro` |
 | Branch deploy | `main` |
@@ -397,7 +397,7 @@ Documentação canônica:
 2. Configurar secrets Actions (`VPS_HOST`, `VPS_USER`, `VPS_PORT`, `VPS_SSH_KEY`, `DEPLOY_PATH`) — ver `secrets.local.md`
 3. DNS Registro.br: `A blog 66.23.231.218`
 4. SSH na VPS: `mkdir -p /opt/tech-blog` + clone do repo
-5. Adicionar bloco Caddy para `blog.faruk.dev.br` → `127.0.0.1:8084`
+5. Adicionar bloco Caddy para `blog.faruk.dev.br` → `127.0.0.1:8085`
 6. `docker compose -f docker-compose.prod.yml up -d --build`
 7. Validar: `curl -sI https://blog.faruk.dev.br/`
 
@@ -406,7 +406,7 @@ Documentação canônica:
 ```
 .github/workflows/deploy.yml   # build Astro + SSH deploy
 Dockerfile                     # multi-stage: node build → nginx serve
-docker-compose.prod.yml        # nginx:8084 → /usr/share/nginx/html
+docker-compose.prod.yml        # nginx:8085 → /usr/share/nginx/html
 nginx.conf                     # gzip, cache estático, SPA fallback off
 scripts/deploy-vps.sh          # pull, build, restart container
 ```
@@ -426,7 +426,7 @@ jobs:
     - cd /opt/tech-blog
     - git pull
     - docker compose -f docker-compose.prod.yml up -d --build
-    - curl health local :8084
+    - curl health local :8085
 ```
 
 ## Portas em uso na VPS (não conflitar)
@@ -437,7 +437,7 @@ jobs:
 | 8081 | financeiro |
 | 8082 | nfe_bot |
 | 8083 | job-hunter |
-| **8084** | **tech-blog** |
+| **8085** | **tech-blog** |
 
 ---
 
@@ -562,8 +562,10 @@ Caddy (HTTPS já configurado)
 - [x] Dockerfile multi-stage
 - [x] docker-compose.prod.yml
 - [x] GitHub Actions deploy.yml
-- [ ] DNS + Caddy na VPS
-- [ ] Primeiro deploy automático
+- [x] DNS + Caddy na VPS
+- [x] Primeiro deploy manual (Docker + HTTPS)
+- [ ] Push do workflow + secrets GitHub (PAT precisa scope `workflow`)
+- [ ] Primeiro deploy automático via Actions
 
 ## Fase 4 — Polish
 

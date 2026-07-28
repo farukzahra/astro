@@ -39,7 +39,7 @@ jobs:
           VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           DEPLOY_REF: origin/${{ github.ref_name }}
-          WEB_PORT: ${{ vars.WEB_PORT || '8084' }}
+          WEB_PORT: ${{ vars.WEB_PORT || '8085' }}
         run: |
           set -eu
           : "${VPS_HOST:?Configure VPS_HOST in repository secrets}"

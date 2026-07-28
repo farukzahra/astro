@@ -3,7 +3,7 @@ set -eu
 
 APP_DIR="${APP_DIR:-/opt/tech-blog}"
 DEPLOY_REF="${DEPLOY_REF:-origin/main}"
-WEB_PORT="${WEB_PORT:-8084}"
+WEB_PORT="${WEB_PORT:-8085}"
 GITHUB_REPO="${GITHUB_REPO:-farukzahra/astro}"
 COMPOSE_FILE="${COMPOSE_FILE:-docker-compose.prod.yml}"
 

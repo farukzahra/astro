@@ -8,7 +8,7 @@ Referência operacional para **https://blog.faruk.dev.br**.
 |------|-------|
 | VPS | `66.23.231.218` |
 | Path | `/opt/tech-blog` |
-| Porta interna | `127.0.0.1:8084` |
+| Porta interna | `127.0.0.1:8085` |
 | Repo | `https://github.com/farukzahra/astro` |
 | Proxy HTTPS | Caddy (`/etc/caddy/Caddyfile`) |
 
@@ -39,7 +39,7 @@ mkdir -p /opt/tech-blog
 git clone https://github.com/farukzahra/astro.git /opt/tech-blog
 cd /opt/tech-blog
 chmod +x scripts/deploy-vps.sh
-WEB_PORT=8084 sh scripts/deploy-vps.sh
+WEB_PORT=8085 sh scripts/deploy-vps.sh
 ```
 
 ## Caddy
@@ -62,7 +62,7 @@ Push em `main` → `.github/workflows/deploy.yml`:
 ## Verificação
 
 ```bash
-curl -sI http://127.0.0.1:8084/
+curl -sI http://127.0.0.1:8085/
 curl -sI https://blog.faruk.dev.br/
 docker ps --filter name=tech-blog
 ```
