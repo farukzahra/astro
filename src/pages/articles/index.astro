@@ -14,18 +14,18 @@ const articles = (await getCollection('articles'))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
-<BaseLayout title="Artigos" description="Todos os artigos do blog técnico.">
+<BaseLayout title="Articles" description="All articles on the technical blog.">
   <div class="mx-auto max-w-6xl px-4 py-12 md:py-16">
     <header class="max-w-3xl">
-      <h1 class="text-4xl font-bold tracking-tight">Artigos</h1>
+      <h1 class="text-4xl font-bold tracking-tight">Articles</h1>
       {
         category ? (
           <p class="mt-3 text-lg" style="color: var(--color-muted)">
-            Filtrando por <strong>{category}</strong>
+            Filtered by <strong>{category}</strong>
           </p>
         ) : (
           <p class="mt-3 text-lg" style="color: var(--color-muted)">
-            Publicações sobre Java, Spring, AI Engineering, MCP, LLMs e arquitetura.
+            Posts on Java, Spring, AI Engineering, MCP, LLMs, and architecture.
           </p>
         )
       }
@@ -40,7 +40,7 @@ const articles = (await getCollection('articles'))
     {
       articles.length === 0 && (
         <p class="mt-10 text-sm" style="color: var(--color-muted)">
-          Nenhum artigo encontrado para este filtro.
+          No articles found for this filter.
         </p>
       )
     }

@@ -13,6 +13,8 @@ const articles = defineCollection({
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),
     series: z.string().optional(),
+    /** Slug folder under examples/ with runnable code for this article */
+    exampleSlug: z.string().optional(),
   }),
 });
 

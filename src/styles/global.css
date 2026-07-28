@@ -29,6 +29,36 @@ html {
   scroll-behavior: smooth;
 }
 
+.article-readable {
+  --font-scale: 1;
+}
+
+.article-readable .prose {
+  font-size: calc(1rem * var(--font-scale));
+  max-width: none;
+}
+
+.article-readable .article-title {
+  font-size: calc(2.25rem * var(--font-scale));
+  line-height: 1.1;
+}
+
+.article-readable .article-description {
+  font-size: calc(1.125rem * var(--font-scale));
+  line-height: 1.6;
+}
+
+.article-readable .article-meta,
+.article-readable .article-byline {
+  font-size: calc(0.875rem * var(--font-scale));
+}
+
+@media (min-width: 768px) {
+  .article-readable .article-title {
+    font-size: calc(3rem * var(--font-scale));
+  }
+}
+
 body {
   font-family: var(--font-sans);
   background: var(--color-surface);
@@ -73,10 +103,31 @@ body {
   background: var(--color-surface-elevated);
 }
 
-.prose :where(blockquote) {
-  border-left: 4px solid var(--color-accent);
-  padding-left: 1rem;
-  color: var(--color-muted);
+.prose :where(ul) {
+  padding-left: 1.25rem;
+}
+
+.prose :where(li) {
+  margin-bottom: 0.5rem;
+}
+
+.prose :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+  font-size: 0.95em;
+}
+
+.prose :where(th, td) {
+  border: 1px solid var(--color-border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose :where(th) {
+  background: var(--color-surface-elevated);
+  font-weight: 600;
 }
 
 .pagefind-ui {

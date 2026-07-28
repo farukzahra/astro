@@ -15,7 +15,7 @@ const href = `/articles/${article.id}`;
   style="border-color: var(--color-border); background: var(--color-surface-elevated)"
 >
   <time class="text-xs uppercase tracking-wide" style="color: var(--color-muted)" datetime={publishDate.toISOString()}>
-    {publishDate.toLocaleDateString('pt-BR', { dateStyle: 'medium' })}
+    {publishDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}
   </time>
   <h3 class="mt-3 text-xl font-semibold group-hover:underline">
     <a href={href}>{title}</a>

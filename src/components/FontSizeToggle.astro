@@ -1,0 +1,67 @@
+<div class="flex items-center gap-1" role="group" aria-label="Font size">
+  <button
+    type="button"
+    data-font-action="decrease"
+    class="rounded-lg border px-2.5 py-2 text-sm font-semibold leading-none transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+    style="border-color: var(--color-border); background: var(--color-surface-elevated)"
+    aria-label="Decrease font size"
+  >
+    −
+  </button>
+  <button
+    type="button"
+    data-font-action="increase"
+    class="rounded-lg border px-2.5 py-2 text-sm font-semibold leading-none transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+    style="border-color: var(--color-border); background: var(--color-surface-elevated)"
+    aria-label="Increase font size"
+  >
+    +
+  </button>
+</div>
+
+<script>
+  const STORAGE_KEY = 'font-scale';
+  const MIN = 0.85;
+  const MAX = 1.35;
+  const STEP = 0.05;
+  const DEFAULT = 1;
+
+  const container = document.querySelector('[data-article-readable]');
+  const decreaseButton = document.querySelector('[data-font-action="decrease"]');
+  const increaseButton = document.querySelector('[data-font-action="increase"]');
+
+  if (!container) {
+    throw new Error('FontSizeToggle requires a [data-article-readable] container.');
+  }
+
+  function readScale() {
+    const stored = parseFloat(localStorage.getItem(STORAGE_KEY) ?? '');
+    if (!Number.isFinite(stored)) return DEFAULT;
+    return Math.min(MAX, Math.max(MIN, stored));
+  }
+
+  function applyScale(scale) {
+    container.style.setProperty('--font-scale', String(scale));
+    localStorage.setItem(STORAGE_KEY, String(scale));
+    syncButtons(scale);
+  }
+
+  function syncButtons(scale) {
+    if (decreaseButton instanceof HTMLButtonElement) {
+      decreaseButton.disabled = scale <= MIN + 0.001;
+    }
+    if (increaseButton instanceof HTMLButtonElement) {
+      increaseButton.disabled = scale >= MAX - 0.001;
+    }
+  }
+
+  applyScale(readScale());
+
+  decreaseButton?.addEventListener('click', () => {
+    applyScale(Math.max(MIN, Number((readScale() - STEP).toFixed(2))));
+  });
+
+  increaseButton?.addEventListener('click', () => {
+    applyScale(Math.min(MAX, Number((readScale() + STEP).toFixed(2))));
+  });
+</script>

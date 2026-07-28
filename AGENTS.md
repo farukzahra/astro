@@ -90,7 +90,7 @@ Skills ficam em `.agents/skills/<name>/SKILL.md` — copiar do `faruk_base` na F
 ## Idioma
 
 * **Commits:** inglês, Conventional Commits
-* **Copy do site:** português (artigos podem ser PT ou EN — definir por artigo)
+* **Copy do site:** inglês (UI e artigos)
 * **Skills (SKILL.md):** inglês
 * **Respostas ao usuário:** português
 

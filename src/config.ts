@@ -1,11 +1,13 @@
 export const siteConfig = {
   title: 'Faruk — Tech Blog',
   description:
-    'Artigos sobre Java, Spring Boot, AI Engineering, MCP, LLMs, RAG, arquitetura de software e notas de estudo.',
+    'Articles on Java, Spring Boot, AI Engineering, MCP, LLMs, RAG, software architecture, and study notes.',
   author: 'Faruk',
   url: 'https://blog.faruk.dev.br',
-  locale: 'pt-BR',
+  locale: 'en',
   github: 'https://github.com/farukzahra',
+  githubRepo: 'https://github.com/farukzahra/astro',
+  githubBranch: 'main',
   linkedin: 'https://www.linkedin.com/in/farukzahra',
   newsletter: '#newsletter',
   giscus: {
@@ -14,7 +16,7 @@ export const siteConfig = {
     category: 'General',
     categoryId: 'DIC_kwDOTmKdhs4DCKnK',
     mapping: 'pathname',
-    lang: 'pt',
+    lang: 'en',
   },
 } as const;
 

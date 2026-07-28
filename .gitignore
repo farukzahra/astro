@@ -24,3 +24,13 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Example project build artifacts
+examples/**/target/
+examples/**/build/
+examples/**/.gradle/
+examples/**/node_modules/
+examples/**/.idea/
+examples/**/.classpath
+examples/**/.project
+examples/**/.settings/

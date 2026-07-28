@@ -3,9 +3,9 @@
   type="button"
   class="rounded-lg border px-3 py-2 text-sm font-medium transition hover:opacity-80"
   style="border-color: var(--color-border); background: var(--color-surface-elevated)"
-  aria-label="Alternar tema"
+  aria-label="Toggle theme"
 >
-  Tema
+  Theme
 </button>
 
 <script>
@@ -15,7 +15,7 @@
   function syncLabel() {
     if (!button) return;
     const isDark = root.classList.contains('dark');
-    button.textContent = isDark ? 'Claro' : 'Escuro';
+    button.textContent = isDark ? 'Light' : 'Dark';
   }
 
   button?.addEventListener('click', () => {

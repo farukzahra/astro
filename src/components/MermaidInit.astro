@@ -5,22 +5,37 @@
   mermaid.initialize({
     startOnLoad: false,
     theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+    securityLevel: 'loose',
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+    },
   });
 
-  const blocks = document.querySelectorAll('pre > code.language-mermaid');
+  const blocks = document.querySelectorAll('pre[data-language="mermaid"]');
 
-  blocks.forEach(async (block, index) => {
-    const parent = block.parentElement;
-    if (!parent) return;
-
-    const graph = block.textContent?.trim();
+  blocks.forEach((pre) => {
+    const graph = pre.textContent?.replace(/\u00a0/g, ' ').trim();
     if (!graph) return;
 
     const container = document.createElement('div');
-    container.className = 'mermaid my-6';
+    container.className = 'mermaid-diagram my-8 flex justify-center overflow-x-auto';
     container.textContent = graph;
-    parent.replaceWith(container);
+    pre.replaceWith(container);
   });
 
-  await mermaid.run({ querySelector: '.mermaid' });
+  await mermaid.run({ querySelector: '.mermaid-diagram' });
 </script>
+
+<style is:global>
+  .mermaid-diagram {
+    width: 100%;
+  }
+
+  .mermaid-diagram svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

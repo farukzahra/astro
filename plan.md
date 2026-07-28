@@ -569,8 +569,9 @@ Caddy (HTTPS já configurado)
 
 ## Fase 4 — Polish
 
+- [x] Giscus (comentários via GitHub Discussions)
 - [ ] Lighthouse audit (>95 performance)
-- [ ] Giscus, reading time, TOC, copy button
+- [ ] Reading time, TOC, copy button
 - [ ] Newsletter (form estático ou serviço externo)
 
 ---

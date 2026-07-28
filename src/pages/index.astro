@@ -26,7 +26,7 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
       featured.length > 0 && (
         <section aria-labelledby="featured-heading">
           <h2 id="featured-heading" class="text-2xl font-bold">
-            Destaques
+            Featured
           </h2>
           <div class="mt-6 grid gap-6 md:grid-cols-3">
             {featured.map((article) => (
@@ -40,10 +40,10 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
     <section aria-labelledby="latest-heading">
       <div class="flex items-end justify-between gap-4">
         <h2 id="latest-heading" class="text-2xl font-bold">
-          Artigos recentes
+          Latest articles
         </h2>
         <a href="/articles" class="text-sm font-medium" style="color: var(--color-accent)">
-          Ver todos
+          View all
         </a>
       </div>
       <div class="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -59,7 +59,7 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
       series.length > 0 && (
         <section aria-labelledby="series-heading">
           <h2 id="series-heading" class="text-2xl font-bold">
-            Séries recentes
+            Recent series
           </h2>
           <ul class="mt-6 grid gap-3 md:grid-cols-2">
             {series.map((name) => (
@@ -78,7 +78,7 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
     <section id="newsletter" aria-labelledby="newsletter-heading" class="rounded-2xl border p-8" style="border-color: var(--color-border); background: var(--color-surface-elevated)">
       <h2 id="newsletter-heading" class="text-2xl font-bold">Newsletter</h2>
       <p class="mt-2 max-w-2xl text-sm leading-relaxed" style="color: var(--color-muted)">
-        Em breve: cadastro para receber novos artigos sobre Java, Spring Boot e AI Engineering.
+        Coming soon: subscribe to get new articles on Java, Spring Boot, and AI Engineering.
       </p>
     </section>
 

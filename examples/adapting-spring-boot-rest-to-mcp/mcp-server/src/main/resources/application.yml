@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: order-mcp-server
+  ai:
+    mcp:
+      server:
+        name: order-mcp-server
+        version: 1.0.0
+        type: SYNC
+        instructions: "Tools for creating and finding customer orders via the existing REST API."
+
+order-api:
+  base-url: http://localhost:8080
