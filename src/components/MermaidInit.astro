@@ -1,0 +1,26 @@
+
+<script>
+  import mermaid from 'mermaid';
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+  });
+
+  const blocks = document.querySelectorAll('pre > code.language-mermaid');
+
+  blocks.forEach(async (block, index) => {
+    const parent = block.parentElement;
+    if (!parent) return;
+
+    const graph = block.textContent?.trim();
+    if (!graph) return;
+
+    const container = document.createElement('div');
+    container.className = 'mermaid my-6';
+    container.textContent = graph;
+    parent.replaceWith(container);
+  });
+
+  await mermaid.run({ querySelector: '.mermaid' });
+</script>

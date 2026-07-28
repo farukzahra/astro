@@ -1,0 +1,48 @@
+---
+title: Java Memory Model — visão prática
+description: Entenda happens-before, visibilidade entre threads e armadilhas comuns no JMM.
+publishDate: 2026-07-20
+updatedDate: 2026-07-28
+author: Faruk
+tags:
+  - Java
+  - Concurrency
+  - JVM
+draft: false
+featured: true
+series: Java Foundations
+---
+
+O **Java Memory Model (JMM)** define quais garantias de visibilidade e ordenação existem entre threads.
+
+## Por que importa
+
+Sem entender o JMM, é fácil escrever código que passa nos testes locais e falha sob carga.
+
+```java
+class Counter {
+  private int value;
+
+  void increment() {
+    value++;
+  }
+
+  int get() {
+    return value;
+  }
+}
+```
+
+`value++` não é atômico. Em cenários concorrentes, updates podem se perder.
+
+## Happens-before
+
+Use `volatile`, `synchronized` ou APIs de `java.util.concurrent` quando precisar de visibilidade garantida.
+
+> Regra prática: se duas threads leem/escrevem o mesmo campo mutável sem sincronização, você está fora do contrato do JMM.
+
+## Próximos passos
+
+- `java.util.concurrent.atomic`
+- Locks explícitos vs intrinsic locks
+- Performance e false sharing

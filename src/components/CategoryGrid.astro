@@ -1,0 +1,20 @@
+---
+import { categories } from '../config';
+---
+
+<section aria-labelledby="categories-heading">
+  <h2 id="categories-heading" class="text-2xl font-bold">Categorias</h2>
+  <div class="mt-6 flex flex-wrap gap-3">
+    {
+      categories.map((category) => (
+        <a
+          href={`/articles?category=${encodeURIComponent(category)}`}
+          class="rounded-full border px-4 py-2 text-sm font-medium transition hover:opacity-80"
+          style="border-color: var(--color-border); background: var(--color-surface-elevated)"
+        >
+          {category}
+        </a>
+      ))
+    }
+  </div>
+</section>

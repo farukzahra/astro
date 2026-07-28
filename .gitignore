@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+.astro/
+
+# Environment & secrets (never commit)
+.env
+.env.*
+!.env.example
+secrets.local.md
+*.local.md
+
+# Pagefind
+public/pagefind/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const category = Astro.url.searchParams.get('category');
+
+const articles = (await getCollection('articles'))
+  .filter((article) => !article.data.draft)
+  .filter((article) => {
+    if (!category) return true;
+    return article.data.tags.some((tag) => tag.toLowerCase() === category.toLowerCase());
+  })
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<BaseLayout title="Artigos" description="Todos os artigos do blog técnico.">
+  <div class="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <header class="max-w-3xl">
+      <h1 class="text-4xl font-bold tracking-tight">Artigos</h1>
+      {
+        category ? (
+          <p class="mt-3 text-lg" style="color: var(--color-muted)">
+            Filtrando por <strong>{category}</strong>
+          </p>
+        ) : (
+          <p class="mt-3 text-lg" style="color: var(--color-muted)">
+            Publicações sobre Java, Spring, AI Engineering, MCP, LLMs e arquitetura.
+          </p>
+        )
+      }
+    </header>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {articles.map((article) => (
+        <ArticleCard article={article} />
+      ))}
+    </div>
+
+    {
+      articles.length === 0 && (
+        <p class="mt-10 text-sm" style="color: var(--color-muted)">
+          Nenhum artigo encontrado para este filtro.
+        </p>
+      )
+    }
+  </div>
+</BaseLayout>

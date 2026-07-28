@@ -1,0 +1,36 @@
+---
+import { siteConfig } from '../config';
+---
+
+<section class="relative overflow-hidden rounded-3xl border px-6 py-16 md:px-12 md:py-20" style="border-color: var(--color-border); background: var(--color-surface-elevated)">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15),transparent_45%)]"></div>
+  <div class="relative max-w-3xl">
+    <p class="text-sm font-semibold uppercase tracking-[0.2em]" style="color: var(--color-accent)">
+      Java · Spring · AI Engineering
+    </p>
+    <h1 class="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
+      Base de conhecimento técnico
+    </h1>
+    <p class="mt-5 text-lg leading-relaxed md:text-xl" style="color: var(--color-muted)">
+      {siteConfig.description}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href="/articles"
+        class="rounded-xl px-5 py-3 text-sm font-semibold text-white"
+        style="background: var(--color-accent)"
+      >
+        Ver artigos
+      </a>
+      <a
+        href={siteConfig.github}
+        target="_blank"
+        rel="noreferrer"
+        class="rounded-xl border px-5 py-3 text-sm font-semibold"
+        style="border-color: var(--color-border)"
+      >
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>

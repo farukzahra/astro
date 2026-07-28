@@ -1,0 +1,187 @@
+# AGENTS.md
+
+Guia operacional para agentes de IA trabalhando no **tech-blog** (Astro SSG). Leia antes de fazer alterações.
+
+## O que é este repo
+
+Blog técnico estático em **Astro** — artigos sobre Java, Spring, AI Engineering, MCP, LLMs, RAG, arquitetura e carreira.
+
+* Plano completo: [`plan.md`](plan.md)
+* Infra VPS/PAT (local, gitignored): [`secrets.local.md`](secrets.local.md)
+* Template de convenções: [`C:\repo\faruk_base\AGENTS.md`](C:\repo\faruk_base\AGENTS.md)
+
+## Stack
+
+| Camada | Escolha |
+|--------|---------|
+| Framework | Astro 5 + TypeScript |
+| Estilo | Tailwind CSS |
+| Conteúdo | MDX + Content Collections |
+| Busca | Pagefind |
+| Syntax highlight | Shiki |
+| Diagramas | Mermaid |
+| Matemática | KaTeX |
+| Deploy | GitHub Actions → Docker (Nginx) → VPS |
+| HTTPS | Caddy no host (`blog.faruk.dev.br`) |
+
+**Sem backend**, **sem banco** — site 100% estático.
+
+## Workflow do agente
+
+Ordem padrão (herdado do Faruk Base):
+
+```
+brainstorming
+  → writing-plans
+  → implement
+  → verification-before-completion
+  → /commit-push (caveman-commit + push)
+```
+
+| Fase | Skill | Obrigatório? |
+|------|-------|--------------|
+| Design | `brainstorming` | Sim, antes de código criativo |
+| Plano | `writing-plans` | Sim, salvar em `docs/plans/` |
+| UI | `frontend-design`, `hallmark` | Ao construir layout/visual |
+| Build | implementação direta | Astro components + MDX |
+| Debug | `systematic-debugging` | Antes de chutar fixes |
+| Done | `verification-before-completion` | Sempre — build + preview |
+| Commit | `caveman-commit` | Só via `/commit-push` ou pedido explícito |
+
+### Skills do Faruk Base — o que usar aqui
+
+Restaurar skills após clone (copiar `skills-lock.json` do faruk_base ou instalar manualmente):
+
+```bash
+npx skills experimental_install
+```
+
+| Skill | Usar neste projeto? | Quando |
+|-------|---------------------|--------|
+| `brainstorming` | ✅ Sim | Nova feature, layout, UX |
+| `writing-plans` | ✅ Sim | Antes de implementar fases do plan.md |
+| `frontend-design` | ✅ Sim | Homepage, tipografia, paleta |
+| `hallmark` | ✅ Sim | Redesign / identidade visual distintiva |
+| `verification-before-completion` | ✅ Sim | Antes de dizer "pronto" |
+| `systematic-debugging` | ✅ Sim | Build quebrado, deploy falhou |
+| `caveman-commit` | ✅ Sim | Commits (Conventional Commits, inglês) |
+| `find-skills` | ✅ Sob demanda | Buscar skills em skills.sh |
+| `tdd` | ⚠️ Opcional | Se adicionarmos testes Vitest/Playwright |
+| `playwright-best-practices` | ⚠️ Opcional | E2E de páginas críticas |
+| `vercel-react-best-practices` | ⚠️ Parcial | Só em islands React, se houver |
+| `prisma-*` | ❌ Não | Sem banco |
+| `nodejs-backend-patterns` | ❌ Não | Sem API backend |
+| `vue-best-practices` | ❌ Não | Stack Astro, não Vue SPA |
+
+Skills ficam em `.agents/skills/<name>/SKILL.md` — copiar do `faruk_base` na Fase 1 ou instalar via `npx skills experimental_install`.
+
+## Comandos slash (Cursor)
+
+| Comando | Arquivo | Propósito |
+|---------|---------|-----------|
+| `/commit-push` | `.cursor/commands/commit-push.md` | Commit + push (único gatilho de commit automático) |
+
+## Regras Cursor
+
+| Regra | Arquivo | Propósito |
+|-------|---------|-----------|
+| Dev server ao concluir task | `.cursor/rules/finish-task-dev-server.mdc` | Subir preview e informar URL |
+
+## Idioma
+
+* **Commits:** inglês, Conventional Commits
+* **Copy do site:** português (artigos podem ser PT ou EN — definir por artigo)
+* **Skills (SKILL.md):** inglês
+* **Respostas ao usuário:** português
+
+## Git
+
+* Commitar **somente** quando o usuário pedir (inclui `/commit-push`)
+* **Nunca** commitar secrets (`.env`, `secrets.local.md`, chaves)
+* **Nunca** force-push em `main`
+
+## Dev server (fim de task)
+
+Ao concluir task que altere código:
+
+```bash
+npm run dev
+```
+
+| Item | Valor |
+|------|-------|
+| URL padrão | http://localhost:4321 |
+| Validar | homepage carrega, artigo de exemplo renderiza |
+
+Antes de deploy, validar build:
+
+```bash
+npm run build
+npm run preview   # http://localhost:4321 ou porta indicada
+```
+
+## Deploy VPS
+
+Ver [`plan.md`](plan.md) § VPS e [`secrets.local.md`](secrets.local.md).
+
+Resumo:
+
+| Item | Valor |
+|------|-------|
+| Path VPS | `/opt/tech-blog` |
+| Porta | `8084` |
+| Domínio | `blog.faruk.dev.br` |
+| SSH key | `C:\repo\financeiro\planos\vps-secrets\deploy_key` |
+| PAT | `C:\repo\financeiro\planos\vps-secrets\github-pat.txt` |
+
+## Estrutura alvo
+
+```
+astro/
+├── AGENTS.md
+├── README.md
+├── plan.md
+├── secrets.local.md          # gitignored
+├── .env.example
+├── .cursor/
+│   ├── commands/commit-push.md
+│   └── rules/finish-task-dev-server.mdc
+├── .github/workflows/deploy.yml
+├── Dockerfile
+├── docker-compose.prod.yml
+├── src/
+│   ├── content/articles/     # MDX por categoria
+│   ├── components/
+│   ├── layouts/
+│   └── pages/
+└── public/
+```
+
+## Conteúdo — frontmatter obrigatório
+
+```yaml
+title: string
+description: string
+publishDate: YYYY-MM-DD
+updatedDate: YYYY-MM-DD
+author: Faruk
+tags: string[]
+draft: boolean
+```
+
+## Performance (Lighthouse targets)
+
+* Performance > 95
+* SEO > 100
+* Accessibility > 95
+* Best Practices > 95
+
+## Bootstrap checklist
+
+1. [ ] `npm create astro@latest` com TypeScript + Tailwind
+2. [ ] Content collections (`src/content/articles/`)
+3. [ ] Integrações: Pagefind, Mermaid, KaTeX, RSS, sitemap
+4. [ ] Homepage conforme plan.md
+5. [ ] Dockerfile + compose + workflow deploy
+6. [ ] DNS + Caddy + primeiro deploy VPS
+7. [ ] Artigo inaugural publicado

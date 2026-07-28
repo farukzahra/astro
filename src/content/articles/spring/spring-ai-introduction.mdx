@@ -1,0 +1,58 @@
+---
+title: Spring AI — introdução prática
+description: Primeiros passos com Spring AI para integrar LLMs em aplicações Spring Boot.
+publishDate: 2026-07-22
+author: Faruk
+tags:
+  - Java
+  - Spring
+  - Spring Boot
+  - LLMs
+draft: false
+featured: true
+series: Spring AI
+---
+
+**Spring AI** simplifica integração com provedores de LLM usando abstrações familiares do ecossistema Spring.
+
+## Stack mínima
+
+```xml
+<dependency>
+  <groupId>org.springframework.ai</groupId>
+  <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
+</dependency>
+```
+
+Configure a chave via variável de ambiente:
+
+```yaml
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+```
+
+## ChatClient
+
+```java
+@RestController
+class ChatController {
+  private final ChatClient chatClient;
+
+  ChatController(ChatClient.Builder builder) {
+    this.chatClient = builder.build();
+  }
+
+  @GetMapping("/chat")
+  String chat(@RequestParam String prompt) {
+    return chatClient.prompt(prompt).call().content();
+  }
+}
+```
+
+## O que vem depois
+
+- RAG com vector store
+- Function calling / tools
+- Observabilidade e guardrails

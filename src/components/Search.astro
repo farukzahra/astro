@@ -1,0 +1,26 @@
+<section id="search" aria-labelledby="search-heading" class="rounded-2xl border p-6" style="border-color: var(--color-border); background: var(--color-surface-elevated)">
+  <h2 id="search-heading" class="text-2xl font-bold">Busca</h2>
+  <p class="mt-2 text-sm" style="color: var(--color-muted)">
+    Pagefind — busca offline após o build de produção.
+  </p>
+  <div class="pagefind-ui mt-4" data-pagefind-ui></div>
+</section>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js" defer></script>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof window.PagefindUI === 'function') {
+      new window.PagefindUI({ element: '[data-pagefind-ui]', showImages: false });
+    }
+  });
+</script>
+
+<script>
+  declare global {
+    interface Window {
+      PagefindUI?: new (options: { element: string; showImages: boolean }) => void;
+    }
+  }
+</script>

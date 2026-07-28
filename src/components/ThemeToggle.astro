@@ -1,0 +1,28 @@
+<button
+  id="theme-toggle"
+  type="button"
+  class="rounded-lg border px-3 py-2 text-sm font-medium transition hover:opacity-80"
+  style="border-color: var(--color-border); background: var(--color-surface-elevated)"
+  aria-label="Alternar tema"
+>
+  Tema
+</button>
+
+<script>
+  const button = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  function syncLabel() {
+    if (!button) return;
+    const isDark = root.classList.contains('dark');
+    button.textContent = isDark ? 'Claro' : 'Escuro';
+  }
+
+  button?.addEventListener('click', () => {
+    const isDark = root.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    syncLabel();
+  });
+
+  syncLabel();
+</script>
