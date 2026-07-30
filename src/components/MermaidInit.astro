@@ -1,35 +1,95 @@
-
 <script>
   import mermaid from 'mermaid';
 
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
-    securityLevel: 'loose',
-    flowchart: {
-      useMaxWidth: true,
-      htmlLabels: true,
-    },
+  /** Hex only — Mermaid rejects oklch()/lab() from CSS variables. */
+  const lumen = {
+    paper: '#1c1c24',
+    surface: '#21212a',
+    panel: '#252530',
+    ink: '#f4f4f6',
+    ink2: '#adb0b8',
+    accent: '#e5a045',
+    rule: '#ffffff1f',
+    noteBg: '#3d3520',
+  };
+
+  async function renderMermaid() {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        darkMode: true,
+        background: 'transparent',
+        primaryColor: lumen.panel,
+        primaryTextColor: lumen.ink,
+        primaryBorderColor: lumen.accent,
+        secondaryColor: lumen.surface,
+        secondaryTextColor: lumen.ink,
+        secondaryBorderColor: lumen.accent,
+        tertiaryColor: lumen.paper,
+        tertiaryTextColor: lumen.ink2,
+        lineColor: lumen.ink2,
+        textColor: lumen.ink,
+        mainBkg: lumen.panel,
+        nodeBorder: lumen.accent,
+        clusterBkg: lumen.paper,
+        clusterBorder: lumen.rule,
+        titleColor: lumen.ink,
+        edgeLabelBackground: lumen.panel,
+        actorBkg: lumen.panel,
+        actorBorder: lumen.accent,
+        actorTextColor: lumen.ink,
+        actorLineColor: lumen.ink2,
+        signalColor: lumen.ink2,
+        signalTextColor: lumen.ink,
+        labelBoxBkgColor: lumen.panel,
+        labelBoxBorderColor: lumen.rule,
+        labelTextColor: lumen.ink,
+        loopTextColor: lumen.ink,
+        noteBkgColor: lumen.noteBg,
+        noteTextColor: lumen.ink,
+        noteBorderColor: lumen.accent,
+        activationBkgColor: lumen.surface,
+        activationBorderColor: lumen.accent,
+        sequenceNumberColor: lumen.paper,
+        fontFamily: 'Geist, system-ui, sans-serif',
+        fontSize: '14px',
+      },
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+      },
+    });
+
+    const blocks = document.querySelectorAll('pre[data-language="mermaid"]');
+
+    blocks.forEach((pre) => {
+      const graph = pre.textContent?.replace(/\u00a0/g, ' ').trim();
+      if (!graph) return;
+
+      const container = document.createElement('div');
+      container.className = 'mermaid-diagram my-8 flex justify-center overflow-x-auto';
+      container.textContent = graph;
+      pre.replaceWith(container);
+    });
+
+    if (blocks.length > 0) {
+      await mermaid.run({ querySelector: '.mermaid-diagram' });
+    }
+  }
+
+  renderMermaid().catch((err) => {
+    console.error('[mermaid]', err);
   });
-
-  const blocks = document.querySelectorAll('pre[data-language="mermaid"]');
-
-  blocks.forEach((pre) => {
-    const graph = pre.textContent?.replace(/\u00a0/g, ' ').trim();
-    if (!graph) return;
-
-    const container = document.createElement('div');
-    container.className = 'mermaid-diagram my-8 flex justify-center overflow-x-auto';
-    container.textContent = graph;
-    pre.replaceWith(container);
-  });
-
-  await mermaid.run({ querySelector: '.mermaid-diagram' });
 </script>
 
 <style is:global>
   .mermaid-diagram {
     width: 100%;
+    padding: 1.25rem 1rem;
+    border: 1px solid var(--lumen-rule);
+    border-radius: 12px;
+    background: var(--lumen-surface);
   }
 
   .mermaid-diagram svg {
@@ -37,5 +97,21 @@
     width: 100%;
     max-width: 100%;
     height: auto;
+  }
+
+  .mermaid-diagram svg .messageText,
+  .mermaid-diagram svg .messageText > tspan,
+  .mermaid-diagram svg .loopText,
+  .mermaid-diagram svg .loopText > tspan,
+  .mermaid-diagram svg .edgeLabel .label text,
+  .mermaid-diagram svg .nodeLabel,
+  .mermaid-diagram svg .label text,
+  .mermaid-diagram svg .legend text {
+    fill: var(--lumen-ink) !important;
+  }
+
+  .mermaid-diagram svg .noteText,
+  .mermaid-diagram svg .noteText > tspan {
+    fill: var(--lumen-ink) !important;
   }
 </style>

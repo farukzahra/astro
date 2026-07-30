@@ -9,6 +9,7 @@ export const siteConfig = {
   githubRepo: 'https://github.com/farukzahra/astro',
   githubBranch: 'main',
   linkedin: 'https://www.linkedin.com/in/farukzahra',
+  resumeUrl: 'https://www.faruk.dev.br/',
   newsletter: '#newsletter',
   giscus: {
     repo: 'farukzahra/astro',

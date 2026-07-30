@@ -1,0 +1,41 @@
+---
+description: After publishing a new blog article, deploy to prod and post to LinkedIn
+globs:
+alwaysApply: true
+---
+
+# Publish article → LinkedIn
+
+When finishing a **new or updated public article** (`draft: false`):
+
+1. **Build locally** — `npm run build` must pass.
+2. **Commit/push** — only if the user asked (or `/commit-push`).
+3. **Wait for deploy** — push to `main` triggers VPS deploy; verify prod:
+   - `GET https://blog.faruk.dev.br/articles/{slug}/` → 200
+4. **LinkedIn post** — English, short, human tone; URL at the end; article link card attached:
+   ```bash
+   npm run linkedin:post -- --slug <category/article-slug>
+   ```
+   Preview first if unsure: add `--dry-run`.
+
+## Copy rules
+
+- **~10 lines** of body text (hook, context, 3–4 technical points, takeaway)
+- **At least 10 hashtags** (from article tags + pool), placed before the URL
+- **URL always last**
+- English, conversational — no emoji spam, no "In today's fast-paced world"
+- Use `scripts/lib/linkedin-copy.mjs` or craft manually with `--text "..."`
+- **Show preview with `--dry-run` and wait for user approval before posting**
+- Skip if `draft: true`
+
+## Prerequisites (one-time)
+
+- `secrets.local.md`: `LINKEDIN_CLIENT_ID`, `LINKEDIN_CLIENT_SECRET`, `LINKEDIN_REFRESH_TOKEN`, `LINKEDIN_PERSON_URN`
+- App Auth redirect: `http://localhost:8787/callback`
+- OAuth: `npm run linkedin:auth`
+
+## Failures
+
+- Prod 404 → fix deploy first, do not post
+- Token expired → re-run `npm run linkedin:auth`
+- Never commit secrets or paste them in chat

@@ -25,7 +25,7 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
     {
       featured.length > 0 && (
         <section aria-labelledby="featured-heading">
-          <h2 id="featured-heading" class="text-2xl font-bold">
+          <h2 id="featured-heading" class="lumen-section-heading text-base">
             Featured
           </h2>
           <div class="mt-6 grid gap-6 md:grid-cols-3">
@@ -39,10 +39,10 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
 
     <section aria-labelledby="latest-heading">
       <div class="flex items-end justify-between gap-4">
-        <h2 id="latest-heading" class="text-2xl font-bold">
+        <h2 id="latest-heading" class="lumen-section-heading text-base">
           Latest articles
         </h2>
-        <a href="/articles" class="text-sm font-medium" style="color: var(--color-accent)">
+        <a href="/articles" class="lumen-section-heading text-xs no-underline hover:underline">
           View all
         </a>
       </div>
@@ -58,14 +58,14 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
     {
       series.length > 0 && (
         <section aria-labelledby="series-heading">
-          <h2 id="series-heading" class="text-2xl font-bold">
+          <h2 id="series-heading" class="lumen-section-heading text-base">
             Recent series
           </h2>
           <ul class="mt-6 grid gap-3 md:grid-cols-2">
             {series.map((name) => (
               <li
-                class="rounded-xl border px-4 py-3 text-sm font-medium"
-                style="border-color: var(--color-border); background: var(--color-surface-elevated)"
+                class="rounded-lg border px-4 py-3 text-sm font-medium"
+                style="border-color: var(--lumen-rule); background: var(--lumen-panel); color: var(--lumen-ink)"
               >
                 {name}
               </li>
@@ -75,18 +75,18 @@ const series = [...new Set(articles.map((article) => article.data.series).filter
       )
     }
 
-    <section id="newsletter" aria-labelledby="newsletter-heading" class="rounded-2xl border p-8" style="border-color: var(--color-border); background: var(--color-surface-elevated)">
-      <h2 id="newsletter-heading" class="text-2xl font-bold">Newsletter</h2>
-      <p class="mt-2 max-w-2xl text-sm leading-relaxed" style="color: var(--color-muted)">
+    <section id="newsletter" aria-labelledby="newsletter-heading" class="lumen-island p-8">
+      <h2 id="newsletter-heading" class="lumen-section-heading text-base">Newsletter</h2>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed" style="color: var(--lumen-ink-2)">
         Coming soon: subscribe to get new articles on Java, Spring Boot, and AI Engineering.
       </p>
     </section>
 
     <section class="flex flex-wrap gap-4 text-sm">
-      <a href={siteConfig.github} target="_blank" rel="noreferrer" class="font-medium" style="color: var(--color-accent)">
+      <a href={siteConfig.github} target="_blank" rel="noreferrer" class="lumen-section-heading text-xs no-underline hover:underline">
         GitHub →
       </a>
-      <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" class="font-medium" style="color: var(--color-accent)">
+      <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" class="lumen-section-heading text-xs no-underline hover:underline">
         LinkedIn →
       </a>
     </section>

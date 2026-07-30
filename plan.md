@@ -544,7 +544,7 @@ Caddy (HTTPS já configurado)
 
 ## Fase 1 — Scaffold (atual)
 
-- [x] Repo `C:\repo\astro` com plano, AGENTS.md, README
+- [x] Repo `C:\repo\blog` com plano, AGENTS.md, README
 - [x] Documentação VPS/PAT em `secrets.local.md`
 - [x] `npm create astro@latest` (template minimal + Tailwind)
 - [x] Content collections + frontmatter schema

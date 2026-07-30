@@ -9,7 +9,7 @@ const { giscus } = siteConfig;
   class="mx-auto max-w-5xl px-4 pb-16"
   aria-labelledby="comments-heading"
 >
-  <h2 id="comments-heading" class="mb-6 text-2xl font-bold">Comments</h2>
+  <h2 id="comments-heading" class="lumen-section-heading mb-6 text-base">Comments</h2>
   <p class="mb-6 text-sm" style="color: var(--color-muted)">
     Comments powered by GitHub — sign in to join the discussion.
   </p>
@@ -28,7 +28,7 @@ const { giscus } = siteConfig;
   }}
 >
   function getTheme() {
-    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    return 'dark';
   }
 
   function loadGiscus() {
@@ -57,9 +57,4 @@ const { giscus } = siteConfig;
   }
 
   loadGiscus();
-
-  const observer = new MutationObserver(() => {
-    sendGiscusTheme(getTheme());
-  });
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 </script>

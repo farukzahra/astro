@@ -31,24 +31,19 @@ const { title, description, publishDate, updatedDate, author, tags, exampleSlug 
     </div>
 
     <article>
-      <header class="article-header mb-10 border-b pb-8" style="border-color: var(--color-border)">
-        <p class="article-meta text-sm uppercase tracking-wide" style="color: var(--color-muted)">
+      <header class="article-header mb-10 border-b pb-8" style="border-color: var(--lumen-rule)">
+        <p class="article-meta" style="color: var(--lumen-accent)">
           {publishDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
           {updatedDate && updatedDate > publishDate && (
             <span> · updated {updatedDate.toLocaleDateString('en-US', { dateStyle: 'long' })}</span>
           )}
         </p>
-        <h1 class="article-title mt-3 font-bold tracking-tight">{title}</h1>
-        <p class="article-description mt-4" style="color: var(--color-muted)">{description}</p>
-        <div class="article-byline mt-6 flex flex-wrap items-center gap-3 text-sm" style="color: var(--color-muted)">
+        <h1 class="article-title mt-3 tracking-tight">{title}</h1>
+        <p class="article-description mt-4" style="color: var(--lumen-ink-2)">{description}</p>
+        <div class="article-byline mt-6 flex flex-wrap items-center gap-3" style="color: var(--lumen-ink-2)">
           <span>By {author}</span>
           {tags.map((tag) => (
-            <span
-              class="rounded-full px-3 py-1 text-xs font-medium"
-              style="background: var(--color-accent-soft); color: var(--color-accent)"
-            >
-              {tag}
-            </span>
+            <span class="lumen-tag">{tag}</span>
           ))}
         </div>
       </header>

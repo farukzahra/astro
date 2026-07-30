@@ -10,22 +10,20 @@ const { title, description, publishDate, tags } = article.data;
 const href = `/articles/${article.id}`;
 ---
 
-<article
-  class="group rounded-2xl border p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
-  style="border-color: var(--color-border); background: var(--color-surface-elevated)"
->
-  <time class="text-xs uppercase tracking-wide" style="color: var(--color-muted)" datetime={publishDate.toISOString()}>
+<article class="lumen-panel group p-6">
+  <time
+    class="lumen-section-heading"
+    datetime={publishDate.toISOString()}
+  >
     {publishDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}
   </time>
-  <h3 class="mt-3 text-xl font-semibold group-hover:underline">
-    <a href={href}>{title}</a>
+  <h3 class="mt-3 text-xl font-normal leading-snug" style="font-family: var(--lumen-font-display); color: var(--lumen-ink)">
+    <a href={href} class="no-underline hover:underline">{title}</a>
   </h3>
-  <p class="mt-2 text-sm leading-relaxed" style="color: var(--color-muted)">{description}</p>
+  <p class="mt-2 text-sm leading-relaxed" style="color: var(--lumen-ink-2)">{description}</p>
   <div class="mt-4 flex flex-wrap gap-2">
     {tags.slice(0, 3).map((tag) => (
-      <span class="rounded-full px-2.5 py-1 text-xs" style="background: var(--color-accent-soft); color: var(--color-accent)">
-        {tag}
-      </span>
+      <span class="lumen-tag">{tag}</span>
     ))}
   </div>
 </article>

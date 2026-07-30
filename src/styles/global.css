@@ -1,33 +1,250 @@
 @import 'tailwindcss';
 @import 'katex/dist/katex.min.css';
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* ── Lumen · Night Foundry (aligned with faruk.dev.br) ── */
 
-@theme {
-  --font-sans: 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
-  --color-surface: #f8fafc;
-  --color-surface-elevated: #ffffff;
-  --color-border: #e2e8f0;
-  --color-text: #0f172a;
-  --color-muted: #64748b;
-  --color-accent: #2563eb;
-  --color-accent-soft: #dbeafe;
+:root {
+  --lumen-paper: oklch(13% 0.014 265);
+  --lumen-panel: oklch(17% 0.016 265);
+  --lumen-surface: oklch(15% 0.014 265);
+  --lumen-ink: oklch(96% 0.006 262);
+  --lumen-ink-2: oklch(72% 0.008 262);
+  --lumen-accent: oklch(76% 0.17 50);
+  --lumen-accent-hover: oklch(80% 0.17 50);
+  --lumen-accent-soft: oklch(76% 0.17 50 / 0.08);
+  --lumen-accent-glow: oklch(76% 0.17 50 / 0.12);
+  --lumen-accent-border: oklch(76% 0.17 50 / 0.28);
+  --lumen-rule: oklch(96% 0.006 262 / 0.12);
+  --lumen-rule-blueprint: oklch(96% 0.006 262 / 0.04);
+  --lumen-nav-bg: oklch(17% 0.016 265 / 0.92);
+  --lumen-nav-hover: oklch(96% 0.006 262 / 0.06);
+  --lumen-shadow: oklch(0% 0 0 / 0.45);
+  --lumen-shadow-nav: oklch(0% 0 0 / 0.35);
+  --lumen-font-display: 'Instrument Serif', Georgia, serif;
+  --lumen-font-body: 'Geist', 'Open Sans', system-ui, sans-serif;
+  --lumen-font-label: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-surface: var(--lumen-paper);
+  --color-surface-elevated: var(--lumen-panel);
+  --color-border: var(--lumen-rule);
+  --color-text: var(--lumen-ink);
+  --color-muted: var(--lumen-ink-2);
+  --color-accent: var(--lumen-accent);
+  --color-accent-soft: var(--lumen-accent-glow);
 }
 
-.dark {
-  --color-surface: #0b1120;
-  --color-surface-elevated: #111827;
-  --color-border: #1f2937;
-  --color-text: #f8fafc;
-  --color-muted: #94a3b8;
-  --color-accent: #60a5fa;
-  --color-accent-soft: #1e3a5f;
+@theme {
+  --font-sans: var(--lumen-font-body);
+  --font-display: var(--lumen-font-display);
+  --font-mono: var(--lumen-font-label);
+  --color-surface: var(--lumen-paper);
+  --color-surface-elevated: var(--lumen-panel);
+  --color-border: var(--lumen-rule);
+  --color-text: var(--lumen-ink);
+  --color-muted: var(--lumen-ink-2);
+  --color-accent: var(--lumen-accent);
+  --color-accent-soft: var(--lumen-accent-glow);
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
+
+html.lumen-theme-active {
+  background:
+    linear-gradient(var(--lumen-rule-blueprint) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, var(--lumen-rule-blueprint) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--lumen-paper);
+}
+
+body {
+  font-family: var(--lumen-font-body);
+  background: transparent;
+  color: var(--lumen-ink-2);
+  overflow-x: clip;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+.lumen-display {
+  font-style: normal;
+}
+
+/* ── Pill nav (faruk AppTopNav) ── */
+
+.app-top-nav {
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+  display: flex;
+  width: fit-content;
+  max-width: calc(100% - 40px);
+  margin: 12px auto 16px;
+  padding: 6px 4px;
+  border: 1px solid var(--lumen-rule);
+  border-radius: 999px;
+  background: var(--lumen-nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px var(--lumen-shadow-nav);
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.app-top-nav a {
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--lumen-ink);
+  font-family: var(--lumen-font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.app-top-nav a:hover {
+  background: var(--lumen-nav-hover);
+  color: var(--lumen-accent);
+}
+
+.app-top-nav a[aria-current='page'] {
+  background: var(--lumen-accent-glow);
+  color: var(--lumen-accent);
+}
+
+/* ── Section headings ── */
+
+.lumen-section-heading {
+  font-family: var(--lumen-font-label);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lumen-accent);
+}
+
+.lumen-page-title {
+  font-family: var(--lumen-font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lumen-ink);
+  line-height: 1.15;
+}
+
+/* ── Panels & cards ── */
+
+.lumen-panel {
+  border: 1px solid var(--lumen-rule);
+  border-radius: 8px;
+  background:
+    radial-gradient(120% 80% at 50% 0%, oklch(76% 0.17 50 / 0.06) 0%, transparent 55%),
+    oklch(17% 0.016 265 / 0.65);
+  transition:
+    transform 200ms ease-out,
+    border-color 200ms ease-out,
+    background 200ms ease-out;
+}
+
+.lumen-panel:hover {
+  transform: translateY(-4px);
+  border-color: oklch(76% 0.17 50 / 0.35);
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--lumen-accent-glow) 0%, transparent 55%),
+    oklch(17% 0.016 265 / 0.8);
+}
+
+.lumen-island {
+  border: 1px solid var(--lumen-rule);
+  border-radius: 8px;
+  background:
+    radial-gradient(80% 40% at 0% 0%, oklch(76% 0.17 50 / 0.04) 0%, transparent 55%),
+    var(--lumen-surface);
+  box-shadow: 0 4px 32px var(--lumen-shadow);
+}
+
+.lumen-hero {
+  border: 1px solid var(--lumen-rule);
+  border-radius: 8px;
+  background:
+    radial-gradient(80% 40% at 100% 0%, oklch(76% 0.17 50 / 0.05) 0%, transparent 55%),
+    var(--lumen-surface);
+  box-shadow: 0 4px 32px var(--lumen-shadow);
+}
+
+.lumen-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--lumen-accent);
+  background: var(--lumen-accent);
+  color: var(--lumen-surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.lumen-btn-primary:hover {
+  background: var(--lumen-accent-hover);
+  border-color: var(--lumen-accent-hover);
+}
+
+.lumen-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--lumen-accent-border);
+  background: var(--lumen-accent-soft);
+  color: var(--lumen-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lumen-btn-outline:hover {
+  background: oklch(76% 0.17 50 / 0.16);
+  color: var(--lumen-ink);
+}
+
+.lumen-tag {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  background: var(--lumen-accent-soft);
+  border: 1px solid var(--lumen-accent-border);
+  color: var(--lumen-ink);
+  font-family: var(--lumen-font-label);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lumen-footer {
+  background: var(--lumen-paper);
+  border-top: 1px solid var(--lumen-rule);
+}
+
+.lumen-footer a {
+  color: var(--lumen-accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.lumen-footer a:hover {
+  color: var(--lumen-ink);
+  text-decoration: underline;
+}
+
+/* ── Article readability ── */
 
 .article-readable {
   --font-scale: 1;
@@ -39,8 +256,12 @@ html {
 }
 
 .article-readable .article-title {
+  font-family: var(--lumen-font-display);
+  font-weight: 400;
   font-size: calc(2.25rem * var(--font-scale));
   line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--lumen-ink);
 }
 
 .article-readable .article-description {
@@ -50,31 +271,41 @@ html {
 
 .article-readable .article-meta,
 .article-readable .article-byline {
-  font-size: calc(0.875rem * var(--font-scale));
+  font-family: var(--lumen-font-label);
+  font-size: calc(0.75rem * var(--font-scale));
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 @media (min-width: 768px) {
   .article-readable .article-title {
-    font-size: calc(3rem * var(--font-scale));
+    font-size: calc(2.75rem * var(--font-scale));
   }
-}
-
-body {
-  font-family: var(--font-sans);
-  background: var(--color-surface);
-  color: var(--color-text);
 }
 
 .prose {
   max-width: 72ch;
   line-height: 1.75;
+  color: var(--lumen-ink-2);
 }
 
 .prose :where(h1, h2, h3, h4) {
-  font-weight: 700;
+  font-family: var(--lumen-font-display);
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.25;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+  color: var(--lumen-ink);
+}
+
+.prose :where(h2) {
+  font-family: var(--lumen-font-label);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lumen-accent);
 }
 
 .prose :where(p, ul, ol, pre, blockquote) {
@@ -82,25 +313,30 @@ body {
 }
 
 .prose :where(a) {
-  color: var(--color-accent);
+  color: var(--lumen-accent);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
+.prose :where(a:hover) {
+  color: var(--lumen-ink);
+}
+
 .prose :where(code):not(:where(pre *)) {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: var(--color-accent-soft);
+  font-family: var(--lumen-font-label);
+  font-size: 0.85em;
+  background: var(--lumen-accent-soft);
+  color: var(--lumen-accent);
   padding: 0.15rem 0.35rem;
   border-radius: 0.25rem;
 }
 
 .prose :where(pre) {
   overflow-x: auto;
-  border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
+  border: 1px solid var(--lumen-rule);
+  border-radius: 0.5rem;
   padding: 1rem;
-  background: var(--color-surface-elevated);
+  background: oklch(13% 0.014 265 / 0.65);
 }
 
 .prose :where(ul) {
@@ -119,21 +355,47 @@ body {
 }
 
 .prose :where(th, td) {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--lumen-rule);
   padding: 0.6rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 
 .prose :where(th) {
-  background: var(--color-surface-elevated);
-  font-weight: 600;
+  font-family: var(--lumen-font-label);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lumen-accent);
+  background: oklch(17% 0.016 265 / 0.8);
+}
+
+.prose :where(strong) {
+  color: var(--lumen-ink);
 }
 
 .pagefind-ui {
-  --pagefind-ui-primary: var(--color-accent);
-  --pagefind-ui-text: var(--color-text);
-  --pagefind-ui-background: var(--color-surface-elevated);
-  --pagefind-ui-border: var(--color-border);
-  --pagefind-ui-tag: var(--color-accent-soft);
+  --pagefind-ui-primary: var(--lumen-accent);
+  --pagefind-ui-text: var(--lumen-ink);
+  --pagefind-ui-background: oklch(13% 0.014 265 / 0.65);
+  --pagefind-ui-border: var(--lumen-rule);
+  --pagefind-ui-tag: var(--lumen-accent-soft);
+}
+
+.lumen-control {
+  border: 1px solid var(--lumen-accent-border);
+  background: var(--lumen-accent-soft);
+  color: var(--lumen-accent);
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lumen-control:hover:not(:disabled) {
+  background: oklch(76% 0.17 50 / 0.16);
+  color: var(--lumen-ink);
+}
+
+.lumen-control:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

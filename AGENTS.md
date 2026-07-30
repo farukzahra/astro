@@ -7,6 +7,7 @@ Guia operacional para agentes de IA trabalhando no **tech-blog** (Astro SSG). Le
 Blog técnico estático em **Astro** — artigos sobre Java, Spring, AI Engineering, MCP, LLMs, RAG, arquitetura e carreira.
 
 * Plano completo: [`plan.md`](plan.md)
+* Guia visual Lumen: [`docs/ESTILO-WEB.md`](docs/ESTILO-WEB.md) — alinhado a [faruk.dev.br](https://www.faruk.dev.br)
 * Infra VPS/PAT (local, gitignored): [`secrets.local.md`](secrets.local.md)
 * Template de convenções: [`C:\repo\faruk_base\AGENTS.md`](C:\repo\faruk_base\AGENTS.md)
 

@@ -3,15 +3,11 @@ import { categories } from '../config';
 ---
 
 <section aria-labelledby="categories-heading">
-  <h2 id="categories-heading" class="text-2xl font-bold">Categories</h2>
+  <h2 id="categories-heading" class="lumen-section-heading text-base">Categories</h2>
   <div class="mt-6 flex flex-wrap gap-3">
     {
       categories.map((category) => (
-        <a
-          href={`/articles?category=${encodeURIComponent(category)}`}
-          class="rounded-full border px-4 py-2 text-sm font-medium transition hover:opacity-80"
-          style="border-color: var(--color-border); background: var(--color-surface-elevated)"
-        >
+        <a href={`/articles?category=${encodeURIComponent(category)}`} class="lumen-tag hover:opacity-90">
           {category}
         </a>
       ))

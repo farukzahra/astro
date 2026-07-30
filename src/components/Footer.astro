@@ -3,19 +3,21 @@ import { siteConfig } from '../config';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t py-10" style="border-color: var(--color-border)">
+<footer class="lumen-footer py-10">
   <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
     <div>
-      <p class="font-semibold">{siteConfig.title}</p>
-      <p class="mt-1 text-sm" style="color: var(--color-muted)">{siteConfig.description}</p>
+      <p class="font-semibold" style="color: var(--lumen-ink)">{siteConfig.title}</p>
+      <p class="mt-1 text-sm" style="color: var(--lumen-ink-2)">{siteConfig.description}</p>
     </div>
     <div class="flex flex-wrap gap-4 text-sm">
-      <a href={siteConfig.github} target="_blank" rel="noreferrer" class="hover:opacity-80">GitHub</a>
-      <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" class="hover:opacity-80">LinkedIn</a>
-      <a href="/rss.xml" class="hover:opacity-80">RSS</a>
+      <a href={siteConfig.resumeUrl} target="_blank" rel="noreferrer">Resume</a>
+      <a href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
+      <a href={siteConfig.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="/rss.xml">RSS</a>
     </div>
   </div>
-  <p class="mx-auto mt-8 max-w-6xl px-4 text-xs" style="color: var(--color-muted)">
-    © {year} {siteConfig.author}. Built with Astro.
+  <p class="mx-auto mt-8 max-w-6xl px-4 text-xs" style="color: var(--lumen-ink-2)">
+    © {year} {siteConfig.author} ·
+    <a href={siteConfig.url}>{siteConfig.url.replace('https://', '')}</a>
   </p>
 </footer>
