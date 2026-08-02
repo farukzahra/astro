@@ -18,6 +18,7 @@ updatedDate: YYYY-MM-DD
 author: Faruk
 tags: string[]               # 4–8 tags
 draft: true                  # false only after build + fact-check + user approval
+                              # draft articles are previewable at /articles/<slug>/ on localhost (npm run dev)
 featured: false              # true for homepage highlight
 series: string               # optional, e.g. "Agents in Production"
 exampleSlug: string        # optional — folder under examples/
@@ -84,7 +85,30 @@ Follow `.cursor/rules/publish-article-linkedin.mdc`:
 1. `npm run build` passes
 2. Commit/push only if user asked
 3. Verify prod URL 200
-4. `npm run linkedin:post -- --slug <category/slug> --dry-run` first
+4. `node scripts/linkedin-post.mjs --slug <category/slug> --dry-run` first
+
+## Delivery checklist (end of every article task)
+
+Before asking for approval, always deliver to the user:
+
+1. **Localhost preview URLs** (validate HTTP 200 yourself):
+   - EN: `http://localhost:4321/articles/<category>/<slug>/`
+   - pt-BR: `http://localhost:4321/articles/<category>/<slug>-pt-br/` (lowercase)
+   - Dev server: `npm run dev` if not running
+2. **LinkedIn preview** — run dry-run (works on `draft: true`):
+   ```bash
+   node scripts/linkedin-post.mjs --slug <category/slug> --dry-run
+   ```
+   Show the **full post text** in the response. Craft manually if auto-copy is off-topic.
+3. **Wait for approval** — user replies "aprovado" / "approved".
+
+After approval:
+
+1. Set `draft: false` on both MDX files (en + pt-BR)
+2. Run `/commit-push` (see `.cursor/commands/commit-push.md`)
+3. After deploy green → `/linkedin-push` (see `.agents/skills/linkedin-push/SKILL.md`)
+
+Never commit, push, or post to LinkedIn in the same turn you finish the draft — wait for explicit approval.
 
 ## Scratch workspace
 

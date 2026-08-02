@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import { isDevPreview } from './articles';
 
 export type ArticleLang = 'en' | 'pt-BR';
 
@@ -37,7 +38,7 @@ export function findAlternateArticle(
     (article) =>
       article.data.translationId === translationId &&
       article.data.lang !== lang &&
-      !article.data.draft,
+      (isDevPreview() || !article.data.draft),
   );
 }
 

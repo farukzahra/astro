@@ -6,6 +6,7 @@ import ArticleCodeLink from '../components/ArticleCodeLink.astro';
 import FontSizeToggle from '../components/FontSizeToggle.astro';
 import LanguageToggle from '../components/LanguageToggle.astro';
 import type { CollectionEntry } from 'astro:content';
+import { isDevPreview } from '../lib/articles';
 import { articleDateLocales, articleUrl, giscusLangs } from '../lib/i18n';
 
 interface Props {
@@ -14,7 +15,9 @@ interface Props {
 }
 
 const { article, alternateArticle } = Astro.props;
-const { title, description, publishDate, updatedDate, author, tags, exampleSlug, lang } = article.data;
+const { title, description, publishDate, updatedDate, author, tags, exampleSlug, lang, draft } =
+  article.data;
+const showDraftBanner = draft && isDevPreview();
 const dateLocale = articleDateLocales[lang];
 const alternateHref = alternateArticle ? articleUrl(alternateArticle.id) : undefined;
 const alternateLinks = alternateArticle
@@ -46,6 +49,20 @@ const updatedLabel = lang === 'pt-BR' ? 'atualizado' : 'updated';
       />
       <FontSizeToggle />
     </div>
+
+    {
+      showDraftBanner && (
+        <div
+          class="mb-6 rounded-lg border px-4 py-3 text-sm font-medium"
+          style="border-color: var(--lumen-accent); background: color-mix(in srgb, var(--lumen-accent) 12%, transparent); color: var(--lumen-ink)"
+          role="status"
+        >
+          {lang === 'pt-BR'
+            ? 'Rascunho — visível só em localhost. Defina draft: false para publicar.'
+            : 'Draft — visible on localhost only. Set draft: false to publish.'}
+        </div>
+      )
+    }
 
     <article>
       <header class="article-header mb-10 border-b pb-8" style="border-color: var(--lumen-rule)">

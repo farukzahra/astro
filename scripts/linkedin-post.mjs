@@ -78,7 +78,7 @@ async function main() {
   }
 
   const meta = parseFrontmatter(articlePath);
-  if (meta.draft) {
+  if (meta.draft && !args.dryRun) {
     throw new Error('Refusing to post: article is draft: true');
   }
   if (!meta.title || !meta.description) {
@@ -87,7 +87,7 @@ async function main() {
 
   const articleUrl = `${SITE_URL.replace(/\/$/, '')}/articles/${args.slug}/`;
 
-  if (!args.skipVerify) {
+  if (!args.skipVerify && !args.dryRun) {
     console.log('Verifying prod URL…', articleUrl);
     await verifyProd(articleUrl);
     console.log('Prod OK');

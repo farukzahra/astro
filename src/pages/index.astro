@@ -6,11 +6,10 @@ import ArticleCard from '../components/ArticleCard.astro';
 import CategoryGrid from '../components/CategoryGrid.astro';
 import Search from '../components/Search.astro';
 import { siteConfig } from '../config';
+import { filterVisibleArticles } from '../lib/articles';
 import { filterArticlesForListing } from '../lib/i18n';
 
-const articles = filterArticlesForListing(
-  (await getCollection('articles')).filter((article) => !article.data.draft),
-)
+const articles = filterArticlesForListing(filterVisibleArticles(await getCollection('articles')))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
 const latest = articles.slice(0, 6);
