@@ -4,17 +4,29 @@ import MermaidInit from '../components/MermaidInit.astro';
 import GiscusComments from '../components/GiscusComments.astro';
 import ArticleCodeLink from '../components/ArticleCodeLink.astro';
 import FontSizeToggle from '../components/FontSizeToggle.astro';
+import LanguageToggle from '../components/LanguageToggle.astro';
 import type { CollectionEntry } from 'astro:content';
+import { articleDateLocales, articleUrl, giscusLangs } from '../lib/i18n';
 
 interface Props {
   article: CollectionEntry<'articles'>;
+  alternateArticle?: CollectionEntry<'articles'>;
 }
 
-const { article } = Astro.props;
-const { title, description, publishDate, updatedDate, author, tags, exampleSlug } = article.data;
+const { article, alternateArticle } = Astro.props;
+const { title, description, publishDate, updatedDate, author, tags, exampleSlug, lang } = article.data;
+const dateLocale = articleDateLocales[lang];
+const alternateHref = alternateArticle ? articleUrl(alternateArticle.id) : undefined;
+const alternateLinks = alternateArticle
+  ? [
+      { lang: article.data.lang, href: articleUrl(article.id) },
+      { lang: alternateArticle.data.lang, href: articleUrl(alternateArticle.id) },
+    ]
+  : undefined;
+const updatedLabel = lang === 'pt-BR' ? 'atualizado' : 'updated';
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} lang={lang} alternateLinks={alternateLinks}>
   <div class="article-readable mx-auto max-w-5xl px-4 py-12 md:py-16" data-article-readable>
     <script is:inline>
       (function () {
@@ -26,22 +38,27 @@ const { title, description, publishDate, updatedDate, author, tags, exampleSlug 
       })();
     </script>
 
-    <div class="mb-6 flex justify-end">
+    <div class="mb-6 flex items-center justify-end gap-2">
+      <LanguageToggle
+        currentLang={lang}
+        alternateHref={alternateHref}
+        alternateLang={alternateArticle?.data.lang}
+      />
       <FontSizeToggle />
     </div>
 
     <article>
       <header class="article-header mb-10 border-b pb-8" style="border-color: var(--lumen-rule)">
         <p class="article-meta" style="color: var(--lumen-accent)">
-          {publishDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
+          {publishDate.toLocaleDateString(dateLocale, { dateStyle: 'long' })}
           {updatedDate && updatedDate > publishDate && (
-            <span> · updated {updatedDate.toLocaleDateString('en-US', { dateStyle: 'long' })}</span>
+            <span> · {updatedLabel} {updatedDate.toLocaleDateString(dateLocale, { dateStyle: 'long' })}</span>
           )}
         </p>
         <h1 class="article-title mt-3 tracking-tight">{title}</h1>
         <p class="article-description mt-4" style="color: var(--lumen-ink-2)">{description}</p>
         <div class="article-byline mt-6 flex flex-wrap items-center gap-3" style="color: var(--lumen-ink-2)">
-          <span>By {author}</span>
+          <span>{lang === 'pt-BR' ? 'Por' : 'By'} {author}</span>
           {tags.map((tag) => (
             <span class="lumen-tag">{tag}</span>
           ))}
@@ -53,6 +70,6 @@ const { title, description, publishDate, updatedDate, author, tags, exampleSlug 
       </div>
     </article>
   </div>
-  <GiscusComments />
+  <GiscusComments lang={giscusLangs[lang]} uiLang={lang} />
   <MermaidInit />
 </BaseLayout>

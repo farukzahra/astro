@@ -1,7 +1,19 @@
 ---
+interface Props {
+  lang?: string;
+  uiLang?: 'en' | 'pt-BR';
+}
+
 import { siteConfig } from '../config';
 
+const { lang = siteConfig.giscus.lang, uiLang = 'en' } = Astro.props;
 const { giscus } = siteConfig;
+
+const heading = uiLang === 'pt-BR' ? 'Comentários' : 'Comments';
+const description =
+  uiLang === 'pt-BR'
+    ? 'Comentários via GitHub — faça login para participar da discussão.'
+    : 'Comments powered by GitHub — sign in to join the discussion.';
 ---
 
 <section
@@ -9,9 +21,9 @@ const { giscus } = siteConfig;
   class="mx-auto max-w-5xl px-4 pb-16"
   aria-labelledby="comments-heading"
 >
-  <h2 id="comments-heading" class="lumen-section-heading mb-6 text-base">Comments</h2>
+  <h2 id="comments-heading" class="lumen-section-heading mb-6 text-base">{heading}</h2>
   <p class="mb-6 text-sm" style="color: var(--color-muted)">
-    Comments powered by GitHub — sign in to join the discussion.
+    {description}
   </p>
   <div class="giscus" />
 </section>
@@ -24,7 +36,7 @@ const { giscus } = siteConfig;
     category: giscus.category,
     categoryId: giscus.categoryId,
     mapping: giscus.mapping,
-    lang: giscus.lang,
+    lang,
   }}
 >
   function getTheme() {

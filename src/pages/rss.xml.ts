@@ -1,10 +1,12 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../config';
+import { filterArticlesForListing } from '../lib/i18n';
 
 export async function GET(context: { site: string | undefined }) {
-  const articles = (await getCollection('articles'))
-    .filter((article) => !article.data.draft)
+  const articles = filterArticlesForListing(
+    (await getCollection('articles')).filter((article) => !article.data.draft),
+  )
     .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
   return rss({

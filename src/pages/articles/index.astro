@@ -2,11 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import { filterArticlesForListing } from '../../lib/i18n';
 
 const category = Astro.url.searchParams.get('category');
 
-const articles = (await getCollection('articles'))
-  .filter((article) => !article.data.draft)
+const articles = filterArticlesForListing(
+  (await getCollection('articles')).filter((article) => !article.data.draft),
+)
   .filter((article) => {
     if (!category) return true;
     return article.data.tags.some((tag) => tag.toLowerCase() === category.toLowerCase());

@@ -15,6 +15,10 @@ const articles = defineCollection({
     series: z.string().optional(),
     /** Slug folder under examples/ with runnable code for this article */
     exampleSlug: z.string().optional(),
+    /** Article language */
+    lang: z.enum(['en', 'pt-BR']).default('en'),
+    /** Shared id linking translated versions (e.g. agents/my-article) */
+    translationId: z.string(),
   }),
 });
 

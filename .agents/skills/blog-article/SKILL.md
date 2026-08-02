@@ -26,9 +26,29 @@ exampleSlug: string        # optional — folder under examples/
 
 Schema: `src/content.config.ts`.
 
+## Bilingual articles (en + pt-BR)
+
+Every public article has **two MDX files** linked by `translationId`:
+
+| Version | File pattern | Example |
+|---------|--------------|---------|
+| English (primary) | `<category>/<slug>.mdx` | `agents/my-post.mdx` |
+| Portuguese | `<category>/<slug>-pt-BR.mdx` | `agents/my-post-pt-BR.mdx` |
+
+Required frontmatter on **both** files:
+
+```yaml
+lang: en          # or pt-BR
+translationId: agents/my-post   # same id on both versions
+```
+
+- Write the English version first, then create the `-pt-BR.mdx` translation.
+- Listings (homepage, RSS) show English only; the 🇺🇸/🇧🇷 toggle on the article page switches languages.
+- Code blocks stay in English in both versions.
+
 ## Content rules
 
-- **Language:** English (UI and articles)
+- **Language:** English for the primary `.mdx`; Portuguese for `-pt-BR.mdx`
 - **User quotes:** If the author wrote in Portuguese (chat with the LLM), **translate to English** in the article. Fix spelling/grammar in the translation (e.g. *denovo* → *again*, *nao* → *don't*). Keep original repo artifact names (README headings, ADRs) only when citing files—add English gloss in parentheses if helpful.
 - **Tone:** Direct, developer-to-developer — see `technical-writing` skill
 - **Structure:** Hook → what you build → architecture → implementation → lessons

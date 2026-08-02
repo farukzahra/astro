@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { findAlternateArticle } from '../../lib/i18n';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles', ({ data }) => !data.draft);
@@ -11,9 +12,11 @@ export async function getStaticPaths() {
 }
 
 const { article } = Astro.props;
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const alternateArticle = findAlternateArticle(allArticles, article);
 const { Content } = await render(article);
 ---
 
-<ArticleLayout article={article}>
+<ArticleLayout article={article} alternateArticle={alternateArticle}>
   <Content />
 </ArticleLayout>

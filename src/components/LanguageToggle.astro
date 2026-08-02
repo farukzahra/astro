@@ -1,0 +1,52 @@
+---
+import type { ArticleLang } from '../lib/i18n';
+import { articleLangFlags, articleLangLabels } from '../lib/i18n';
+
+interface Props {
+  currentLang: ArticleLang;
+  alternateHref?: string;
+  alternateLang?: ArticleLang;
+}
+
+const { currentLang, alternateHref, alternateLang } = Astro.props;
+
+const langs: ArticleLang[] = ['en', 'pt-BR'];
+---
+
+<div class="flex items-center gap-1" role="group" aria-label="Language">
+  {
+    langs.map((lang) => {
+      const isCurrent = lang === currentLang;
+      const label = articleLangLabels[lang];
+      const flag = articleLangFlags[lang];
+
+      if (isCurrent) {
+        return (
+          <span
+            class="lumen-control px-2.5 py-2 text-base leading-none"
+            aria-current="true"
+            aria-label={label}
+            title={label}
+          >
+            {flag}
+          </span>
+        );
+      }
+
+      if (lang === alternateLang && alternateHref) {
+        return (
+          <a
+            href={alternateHref}
+            class="lumen-control px-2.5 py-2 text-base leading-none opacity-70 hover:opacity-100"
+            aria-label={label}
+            title={label}
+          >
+            {flag}
+          </a>
+        );
+      }
+
+      return null;
+    })
+  }
+</div>
