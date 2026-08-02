@@ -59,7 +59,7 @@ Ubuntu VPS
 # Project Structure
 
 ```
-tech-blog/
+blog/
 
 ├── public/
 │
@@ -385,18 +385,18 @@ Documentação canônica:
 | Item | Valor |
 |------|-------|
 | VPS IP | `66.23.231.218` |
-| Path na VPS | `/opt/tech-blog` |
+| Path na VPS | `/opt/blog` |
 | Porta interna | `8085` (Caddy → Nginx Docker) |
 | Domínio sugerido | `blog.faruk.dev.br` |
-| Repo GitHub | `farukzahra/astro` |
+| Repo GitHub | `farukzahra/blog` |
 | Branch deploy | `main` |
 
 ## Primeiro deploy na VPS (checklist)
 
-1. Repositório `farukzahra/astro` no GitHub
+1. Repositório `farukzahra/blog` no GitHub
 2. Configurar secrets Actions (`VPS_HOST`, `VPS_USER`, `VPS_PORT`, `VPS_SSH_KEY`, `DEPLOY_PATH`) — ver `secrets.local.md`
 3. DNS Registro.br: `A blog 66.23.231.218`
-4. SSH na VPS: `mkdir -p /opt/tech-blog` + clone do repo
+4. SSH na VPS: `mkdir -p /opt/blog` + clone do repo
 5. Adicionar bloco Caddy para `blog.faruk.dev.br` → `127.0.0.1:8085`
 6. `docker compose -f docker-compose.prod.yml up -d --build`
 7. Validar: `curl -sI https://blog.faruk.dev.br/`
@@ -420,10 +420,10 @@ jobs:
   build:
     - npm ci
     - npm run build          # astro build + pagefind
-    - docker build -t tech-blog .
+    - docker build -t blog .
   deploy:
     - ssh to VPS
-    - cd /opt/tech-blog
+    - cd /opt/blog
     - git pull
     - docker compose -f docker-compose.prod.yml up -d --build
     - curl health local :8085
@@ -437,7 +437,7 @@ jobs:
 | 8081 | financeiro |
 | 8082 | nfe_bot |
 | 8083 | job-hunter |
-| **8085** | **tech-blog** |
+| **8085** | **blog** |
 
 ---
 

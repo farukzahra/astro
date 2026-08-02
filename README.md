@@ -6,7 +6,7 @@ Blog técnico estático sobre **Java**, **Spring Boot**, **AI Engineering**, **M
 
 ✅ **Fase 1 concluída** — scaffold Astro funcional com 3 artigos de exemplo.
 
-Repositório: [github.com/farukzahra/astro](https://github.com/farukzahra/astro)
+Repositório: [github.com/farukzahra/blog](https://github.com/farukzahra/blog)
 
 ## Desenvolvimento local
 

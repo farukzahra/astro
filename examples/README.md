@@ -27,7 +27,7 @@ exampleSlug: adapting-spring-boot-rest-to-mcp
 
 The blog renders a link to:
 
-`https://github.com/farukzahra/astro/tree/main/examples/<exampleSlug>`
+`https://github.com/farukzahra/blog/tree/main/examples/<exampleSlug>`
 
 ## Rules
 

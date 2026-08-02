@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Guia operacional para agentes de IA trabalhando no **tech-blog** (Astro SSG). Leia antes de fazer alterações.
+Guia operacional para agentes de IA trabalhando no **blog** (Astro SSG). Leia antes de fazer alterações.
 
 ## O que é este repo
 
@@ -76,6 +76,38 @@ npx skills experimental_install
 
 Skills ficam em `.agents/skills/<name>/SKILL.md` — copiar do `faruk_base` na Fase 1 ou instalar via `npx skills experimental_install`.
 
+### Pipeline — artigo a partir de repositório
+
+Orquestrador: **`article-from-repo`**. Skills em `.agents/skills/`.
+
+```
+research-codebase → codebase-summary → c4-architecture
+  → content-research-writer → technical-writing → fact-checker
+  → blog-article → verification-before-completion (npm run build)
+```
+
+| Skill | Origem | Função |
+|-------|--------|--------|
+| `research-codebase` | local | Discovery no codebase fonte |
+| `codebase-summary` | local | Contexto consolidado para o writer |
+| `c4-architecture` | softaworks/agent-toolkit | Diagramas Mermaid |
+| `content-research-writer` | composiohq/awesome-claude-skills | Outline + rascunho |
+| `technical-writing` | mindrally/skills | Estilo dev (HOW/WHY) |
+| `fact-checker` | local | Claims vs evidência |
+| `blog-article` | local | MDX + frontmatter deste blog |
+
+Artefatos intermediários: `.scratch/<slug>/`. Publicação LinkedIn: regra `publish-article-linkedin.mdc`.
+
+Instalar skills upstream:
+
+```bash
+npx skills add softaworks/agent-toolkit --skill c4-architecture
+npx skills add composiohq/awesome-claude-skills --skill content-research-writer
+npx skills add mindrally/skills --skill technical-writing
+```
+
+(`research-codebase`, `codebase-summary`, `fact-checker` são locais — upstream removido ou renomeado nos repos originais.)
+
 ## Comandos slash (Cursor)
 
 | Comando | Arquivo | Propósito |
@@ -129,7 +161,7 @@ Resumo:
 
 | Item | Valor |
 |------|-------|
-| Path VPS | `/opt/tech-blog` |
+| Path VPS | `/opt/blog` |
 | Porta | `8085` |
 | Domínio | `blog.faruk.dev.br` |
 | SSH key | `C:\repo\financeiro\planos\vps-secrets\deploy_key` |

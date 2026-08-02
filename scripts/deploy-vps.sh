@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 set -eu
 
-APP_DIR="${APP_DIR:-/opt/tech-blog}"
+APP_DIR="${APP_DIR:-/opt/blog}"
 DEPLOY_REF="${DEPLOY_REF:-origin/main}"
 WEB_PORT="${WEB_PORT:-8085}"
-GITHUB_REPO="${GITHUB_REPO:-farukzahra/astro}"
+GITHUB_REPO="${GITHUB_REPO:-farukzahra/blog}"
 COMPOSE_FILE="${COMPOSE_FILE:-docker-compose.prod.yml}"
 
 cd "$APP_DIR"
@@ -35,7 +35,7 @@ deploy_stack() {
 health_check() {
   sleep 3
   curl -fsS "http://127.0.0.1:${WEB_PORT}/" >/dev/null
-  echo "OK: tech-blog responding on 127.0.0.1:${WEB_PORT}"
+  echo "OK: blog responding on 127.0.0.1:${WEB_PORT}"
 }
 
 sync_repo

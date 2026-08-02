@@ -7,9 +7,9 @@ Referência operacional para **https://blog.faruk.dev.br**.
 | Item | Valor |
 |------|-------|
 | VPS | `66.23.231.218` |
-| Path | `/opt/tech-blog` |
+| Path | `/opt/blog` |
 | Porta interna | `127.0.0.1:8085` |
-| Repo | `https://github.com/farukzahra/astro` |
+| Repo | `https://github.com/farukzahra/blog` |
 | Proxy HTTPS | Caddy (`/etc/caddy/Caddyfile`) |
 
 Credenciais locais: `secrets.local.md` (gitignored).
@@ -28,16 +28,16 @@ A  blog  66.23.231.218
 | `VPS_USER` | `root` |
 | `VPS_PORT` | `22` |
 | `VPS_SSH_KEY` | conteúdo de `deploy_key` |
-| `DEPLOY_PATH` | `/opt/tech-blog` |
+| `DEPLOY_PATH` | `/opt/blog` |
 
 ## Primeiro deploy manual
 
 ```bash
 ssh -i C:/repo/financeiro/planos/vps-secrets/deploy_key root@66.23.231.218
 
-mkdir -p /opt/tech-blog
-git clone https://github.com/farukzahra/astro.git /opt/tech-blog
-cd /opt/tech-blog
+mkdir -p /opt/blog
+git clone https://github.com/farukzahra/blog.git /opt/blog
+cd /opt/blog
 chmod +x scripts/deploy-vps.sh
 WEB_PORT=8085 sh scripts/deploy-vps.sh
 ```
@@ -64,5 +64,5 @@ Push em `main` → `.github/workflows/deploy.yml`:
 ```bash
 curl -sI http://127.0.0.1:8085/
 curl -sI https://blog.faruk.dev.br/
-docker ps --filter name=tech-blog
+docker ps --filter name=blog
 ```

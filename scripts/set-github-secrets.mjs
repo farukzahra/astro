@@ -9,7 +9,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const sodium = require('libsodium-wrappers');
 
-const REPO = 'farukzahra/astro';
+const REPO = 'farukzahra/blog';
 const PAT = process.env.GITHUB_PAT;
 if (!PAT) {
   console.error('Set GITHUB_PAT');
@@ -71,7 +71,7 @@ const deployKey = readFileSync('C:/repo/financeiro/planos/vps-secrets/deploy_key
 await setSecret('VPS_HOST', '66.23.231.218');
 await setSecret('VPS_USER', 'root');
 await setSecret('VPS_PORT', '22');
-await setSecret('DEPLOY_PATH', '/opt/tech-blog');
+await setSecret('DEPLOY_PATH', '/opt/blog');
 await setSecret('VPS_SSH_KEY', deployKey);
 await setVariable('WEB_PORT', '8085');
 

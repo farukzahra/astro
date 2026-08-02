@@ -1,15 +1,83 @@
 {
   "version": 1,
   "skills": {
+    "ask-questions": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ask-questions/SKILL.md",
+      "computedHash": "f129f942ab3b16ee6b333a8e8bc163f7da76040da416514583f16895198c7e4f"
+    },
+    "article-from-repo": {
+      "source": "local/blog",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/article-from-repo/SKILL.md"
+    },
+    "audit": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/audit/SKILL.md",
+      "computedHash": "5744e03f2db1c39b1a58e4f6866b33172c694fb17284eeae517e50760cb2e785"
+    },
+    "blog-article": {
+      "source": "local/blog",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/blog-article/SKILL.md"
+    },
+    "codebase-summary": {
+      "source": "local/blog",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/codebase-summary/SKILL.md"
+    },
     "brainstorming": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "skillPath": "skills/brainstorming/SKILL.md"
     },
+    "c4-architecture": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/c4-architecture/SKILL.md",
+      "computedHash": "9192b5d6be529478a70d1a73f3d4ce83db12c2052c4e6df4accd445f21e906d4"
+    },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-commit/SKILL.md"
+    },
+    "code-quality-review": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/code-quality-review/SKILL.md",
+      "computedHash": "d279f5744cb9917a38094621320ae83c5a6b6038888c860f9f3a1a6dcf5bb18b"
+    },
+    "content-research-writer": {
+      "source": "composiohq/awesome-claude-skills",
+      "sourceType": "github",
+      "skillPath": "content-research-writer/SKILL.md",
+      "computedHash": "17d22250b59fd2544477788e4a27bde6503e2f3b5a938d21fac69b733fa8e938"
+    },
+    "create-plan": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/create-plan/SKILL.md",
+      "computedHash": "21477d55b58c6dcfbb9f0cba65b6d96229cfb2172d2d552bc5b9017867737d5c"
+    },
+    "cursor-cli": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/cursor-cli/SKILL.md",
+      "computedHash": "3a07ed31c5a260cfcef0e3c3421779f5b375a70c7547aac2c33f414bffb3054a"
+    },
+    "diagnose-issue": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/diagnose-issue/SKILL.md",
+      "computedHash": "7943d53e4907638c6419e72693ce194b6f2f055523b7203de6afd773973d1350"
+    },
+    "fact-checker": {
+      "source": "local/blog",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/fact-checker/SKILL.md"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -26,10 +94,51 @@
       "sourceType": "github",
       "skillPath": "skills/hallmark/SKILL.md"
     },
+    "handoff-work": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/handoff-work/SKILL.md",
+      "computedHash": "cd337618b1cfd39aadd63be519b3e3aa3c145e6c22f7b236bde314ec965e3629"
+    },
+    "implement-plan": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/implement-plan/SKILL.md",
+      "computedHash": "39487f658ad25d4c07fed9f16416facc65e7cbac2a1dc07b0a3163923243dccd"
+    },
+    "interrogator": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/interrogator/SKILL.md",
+      "computedHash": "90ccb6166240f34f33547fa0983a907197c73333152a39390dfae70232c481f3"
+    },
     "playwright-best-practices": {
       "source": "currents-dev/playwright-best-practices-skill",
       "sourceType": "github",
       "skillPath": "SKILL.md"
+    },
+    "react-to-review": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-to-review/SKILL.md",
+      "computedHash": "bb01bbc784d9c62ba820565aed3d0a2bbb9f1eaa8bf7b963aac647421cee1a1a"
+    },
+    "review-implementation": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-implementation/SKILL.md",
+      "computedHash": "26dfd2f338fdb6e34b5964ae663744503301571dcc4a9c107ea6e55ad34008c9"
+    },
+    "research-codebase": {
+      "source": "local/blog",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/research-codebase/SKILL.md"
+    },
+    "review-spec": {
+      "source": "ferueda/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-spec/SKILL.md",
+      "computedHash": "37e4bf9db7d5fc8147d275873448d74d33a66c7d0b174d4cec43b21a559dee13"
     },
     "systematic-debugging": {
       "source": "obra/superpowers",
@@ -40,6 +149,12 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/tdd/SKILL.md"
+    },
+    "technical-writing": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "technical-writing/SKILL.md",
+      "computedHash": "84fa66851fa6618549bdd387bee0a1f8bcd911e1a77cec9f25f0c06b7d4b2749"
     },
     "verification-before-completion": {
       "source": "obra/superpowers",
